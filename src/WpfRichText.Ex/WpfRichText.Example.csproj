@@ -81,10 +81,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Window2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,9 +88,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -128,16 +121,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WPFRichTextBox\WPFRichTextBox.csproj">
-      <Project>{23c13251-6bd3-40d0-9ece-db200cdbc68a}</Project>
-      <Name>WPFRichTextBox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WpfRichText\WpfRichText.csproj">
       <Project>{78147c43-db7b-4571-bc7a-e7f0075b4b78}</Project>
       <Name>WpfRichText</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTMLPage2.html" />
     <Content Include="HTMLPage1.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

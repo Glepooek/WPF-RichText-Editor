@@ -105,17 +105,31 @@ namespace WPFRichTextBox
             }
 
             TextRange selectedText = new TextRange(mainRTB.Selection.Start, mainRTB.Selection.End);
-            if (selectedText != null)
+            if (selectedText != null && !selectedText.IsEmpty)
             {
-                if (selectedText.GetPropertyValue(Inline.TextDecorationsProperty) == TextDecorations.Strikethrough)
+                var textDecorations = (TextDecorationCollection)selectedText.GetPropertyValue(Inline.TextDecorationsProperty);
+                var textDecoration = textDecorations.FirstOrDefault(td => td.Location == TextDecorationLocation.Strikethrough);
+                if (textDecoration != null)
                 {
                     // 如果已经有了删除线，那么移除
-                    selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+                    //selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+                    textDecorations.Remove(textDecoration);
                 }
                 else
                 {
                     // 如果没有删除线，那么添加
-                    selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+                    //selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+                    var myTextDecoration = new TextDecoration() { Location = TextDecorationLocation.Strikethrough };
+                    if (textDecorations.IsFrozen)
+                    {
+                        var clone = textDecorations.Clone();
+                        clone.Add(myTextDecoration);
+                        selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, clone);
+                    }
+                    else
+                    {
+                        textDecorations.Add(myTextDecoration);
+                    }
                 }
             }
         }

@@ -2,35 +2,37 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Controls="clr-namespace:WPFRichTextBox;assembly=WPFRichTextBox"
-    x:Class="WpfRichText.Window2"
+    x:Class="WPFRichTextBox.Example.Window2"
     WindowState="Maximized"
     Title="Window2">
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="#FFFFFF">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ToggleButton
-            Margin="2"
-            x:Name="setReadOnly"
-            HorizontalAlignment="Left"
-            Content="Set ReadOnly"
-            Checked="setReadOnly_Checked"
-            Unchecked="setReadOnly_Unchecked" />
         <Controls:RichTextEditor
             x:Name="sampleEditor"
-            Grid.Row="1"
+            Margin="5"
             HtmlText="{Binding HtmlText, Mode=TwoWay}"
             PlainText="{Binding PlainText, Mode=TwoWay}"
             IsReadOnly="False"
             Background="#FFFFFF"
-            BorderThickness="1,0,1,1"
-            BorderBrush="#DAE1E6" />
+            BorderBrush="#DAE1E6"
+            FontSize="20"
+            Foreground="Black" />
+        <ToggleButton
+            Grid.Row="1"
+            Margin="5"
+            x:Name="setReadOnly"
+            Content="Set ReadOnly"
+            Height="30"
+            Checked="setReadOnly_Checked"
+            Unchecked="setReadOnly_Unchecked" />
         <Button
             Grid.Row="2"
             Content="Get XAML"

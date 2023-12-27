@@ -412,9 +412,83 @@
             <Setter Property="AcceptsTab" Value="True" />
             <Setter Property="MinHeight" Value="100" />
             <Setter Property="AcceptsTab" Value="True" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="1,0,1,1" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ContextMenu" Value="{x:Null}" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Grid>
+                            <Border
+                                x:Name="Bd"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
+        <ControlTemplate x:Key="ToolBarControlTemplate" TargetType="{x:Type ToolBar}">
+            <Grid
+                x:Name="Grid"
+                Margin="0"
+                SnapsToDevicePixels="True">
+                <Border
+                    x:Name="MainPanelBorder"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    Padding="{TemplateBinding Padding}">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="0" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding}" Value="true">
+                                    <Setter Property="CornerRadius" Value="0" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <DockPanel KeyboardNavigation.TabIndex="1" KeyboardNavigation.TabNavigation="Local">
+                        <Thumb x:Name="ToolBarThumb" Visibility="Collapsed" />
+                        <ContentPresenter
+                            x:Name="ToolBarHeader"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            Content="{TemplateBinding Header}"
+                            ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                            ContentSource="Header"
+                            HorizontalAlignment="Center"
+                            Margin="4,0"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            VerticalAlignment="Center" />
+                        <ToolBarPanel
+                            x:Name="PART_ToolBarPanel"
+                            IsItemsHost="True"
+                            Margin="0,1,2,2"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </DockPanel>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsOverflowOpen" Value="True">
+                    <Setter Property="IsEnabled" TargetName="ToolBarThumb" Value="False" />
+                </Trigger>
+                <Trigger Property="Header" Value="{x:Null}">
+                    <Setter Property="Visibility" TargetName="ToolBarHeader" Value="Collapsed" />
+                </Trigger>
+                <Trigger Property="ToolBarTray.IsLocked" Value="True">
+                    <Setter Property="Visibility" TargetName="ToolBarThumb" Value="Collapsed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
 
     </UserControl.Resources>
 
@@ -425,52 +499,58 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel
+        <ToolBar
             x:Name="tools"
-            Height="32"
-            Margin="0,0,0,16"
-            Orientation="Horizontal">
-            <TextBlock
-                Text="字号："
-                FontSize="14"
-                Foreground="#3C4752"
-                VerticalAlignment="Center" />
-            <ComboBox
-                x:Name="FontSizeCmb"
-                Style="{StaticResource ComboBoxStyle}"
-                SelectedIndex="1"
-                SelectionChanged="FontSizeCmb_SelectionChanged">
-                <ComboBoxItem Content="小" />
-                <ComboBoxItem Content="中" />
-                <ComboBoxItem Content="大" />
-            </ComboBox>
-            <TextBlock
-                Text="字体颜色："
-                FontSize="14"
-                Foreground="#3C4752"
-                VerticalAlignment="Center"
-                Margin="19,0,0,0" />
-            <ComboBox
-                x:Name="ColorCmb"
-                Style="{StaticResource ComboBoxStyle1}"
-                SelectedIndex="4"
-                SelectionChanged="ColorCmb_SelectionChanged">
-                <ComboBoxItem Content="#FE0000" />
-                <ComboBoxItem Content="#FBC039" />
-                <ComboBoxItem Content="#49D721" />
-                <ComboBoxItem Content="#1A77FC" />
-                <ComboBoxItem Content="#000000" />
-            </ComboBox>
-        </StackPanel>
+            ToolBarTray.IsLocked="True"
+            Background="Transparent"
+            Template="{StaticResource ToolBarControlTemplate}">
+            <StackPanel
+                Height="32"
+                Orientation="Horizontal"
+                Margin="0,0,0,16">
+                <TextBlock
+                    Text="字号："
+                    FontSize="14"
+                    Foreground="#3C4752"
+                    VerticalAlignment="Center" />
+                <ComboBox
+                    x:Name="FontSizeCmb"
+                    Style="{StaticResource ComboBoxStyle}"
+                    SelectedIndex="1"
+                    SelectionChanged="FontSizeCmb_SelectionChanged">
+                    <ComboBoxItem Content="小" />
+                    <ComboBoxItem Content="中" />
+                    <ComboBoxItem Content="大" />
+                </ComboBox>
+                <TextBlock
+                    Text="字体颜色："
+                    FontSize="14"
+                    Foreground="#3C4752"
+                    VerticalAlignment="Center"
+                    Margin="19,0,0,0" />
+                <ComboBox
+                    x:Name="ColorCmb"
+                    Style="{StaticResource ComboBoxStyle1}"
+                    SelectedIndex="4"
+                    SelectionChanged="ColorCmb_SelectionChanged">
+                    <ComboBoxItem Content="#FE0000" />
+                    <ComboBoxItem Content="#FBC039" />
+                    <ComboBoxItem Content="#49D721" />
+                    <ComboBoxItem Content="#1A77FC" />
+                    <ComboBoxItem Content="#000000" />
+                </ComboBox>
+            </StackPanel>
+        </ToolBar>
 
-        <Border
+        <ToolBar
             x:Name="tools1"
             Grid.Row="1"
+            ToolBarTray.IsLocked="True"
+            Template="{StaticResource ToolBarControlTemplate}"
             Background="#F5F8FA"
             BorderBrush="#DAE1E6"
             BorderThickness="1"
-            Height="32"
-            CornerRadius="4,4,0,0">
+            Height="38">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Button
                     Content="B"
@@ -493,19 +573,18 @@
                     Style="{StaticResource DellineToggleButtonStyle}"
                     Click="StrikethroughButton_Click" />
             </StackPanel>
-        </Border>
+        </ToolBar>
 
-        <ScrollViewer Grid.Row="2">
-            <RichTextBox
-                x:Name="mainRTB"
-                asis:RichTextBoxAssistant.BoundDocument="{Binding HtmlText, ElementName=uxRichTextEditor}"
-                ContextMenu="{x:Null}"
-                IsReadOnly="{Binding IsReadOnly, ElementName=uxRichTextEditor}"
-                Background="{Binding Background, ElementName=uxRichTextEditor}"
-                BorderBrush="{Binding BorderBrush, ElementName=uxRichTextEditor}"
-                BorderThickness="{Binding BorderThickness, ElementName=uxRichTextEditor}"
-                Style="{StaticResource RichTextBoxStyle}"
-                TextChanged="mainRTB_TextChanged" />
-        </ScrollViewer>
+        <RichTextBox
+            x:Name="mainRTB"
+            Grid.Row="2"
+            asis:RichTextBoxAssistant.BoundDocument="{Binding HtmlText, ElementName=uxRichTextEditor}"
+            IsReadOnly="{Binding IsReadOnly, ElementName=uxRichTextEditor}"
+            Background="{Binding Background, ElementName=uxRichTextEditor}"
+            BorderBrush="{Binding BorderBrush, ElementName=uxRichTextEditor}"
+            FontSize="{Binding FontSize, ElementName=uxRichTextEditor}"
+            Foreground="{Binding Foreground, ElementName=uxRichTextEditor}"
+            Style="{StaticResource RichTextBoxStyle}"
+            TextChanged="mainRTB_TextChanged" />
     </Grid>
 </UserControl>
