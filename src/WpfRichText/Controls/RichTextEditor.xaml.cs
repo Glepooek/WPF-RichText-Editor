@@ -22,8 +22,8 @@ namespace WpfRichText
     public partial class RichTextEditor : UserControl
     {
 		/// <summary></summary>
-		public static readonly DependencyProperty TextProperty =
-		  DependencyProperty.Register("Text", typeof(string), typeof(RichTextEditor),
+		public static readonly DependencyProperty HtmlTextProperty =
+		  DependencyProperty.Register("HtmlText", typeof(string), typeof(RichTextEditor),
 		  new PropertyMetadata(string.Empty));
 
 		/// <summary></summary>
@@ -64,12 +64,12 @@ namespace WpfRichText
 		}
 
 		/// <summary></summary>
-		public string Text
+		public string HtmlText
 		{
-			get { return GetValue(TextProperty) as string; }
+			get { return GetValue(HtmlTextProperty) as string; }
 			set
 			{
-				SetValue(TextProperty, value);
+				SetValue(HtmlTextProperty, value);
 			}
 		}
 

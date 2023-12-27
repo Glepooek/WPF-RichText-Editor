@@ -63,35 +63,54 @@ namespace WpfRichText
     {  
         public DelegateCommand GetXamlCommand { get; private set; }
 		public DelegateCommand LoadHtmlCommand { get; private set; }
+        public DelegateCommand GetPlainTextCommand { get; private set; }
 
         #region Constructor
         public PageViewModel()
         {
-			
             GetXamlCommand = new DelegateCommand(() =>
             {
-                MessageBox.Show(this.Text);
+                MessageBox.Show(this.HtmlText);
             });
 
 			LoadHtmlCommand = new DelegateCommand(() =>
 			{
-				this.Text = Properties.Resources.HTMLPage1;
+				this.HtmlText = Properties.Resources.HTMLPage1;
 			});
+
+            GetPlainTextCommand = new DelegateCommand(() => 
+            {
+                MessageBox.Show(this.PlainText);
+            });
         }
         #endregion
         
         #region Name
-        private string text = string.Empty;
-        public string Text
+        private string htmlText = string.Empty;
+        public string HtmlText
         {
             get
             {
-                return text;
+                return htmlText;
             }
             set
             {
-                text = value;
-                this.RaisePropertyChanged(p => p.Text);
+                htmlText = value;
+                this.RaisePropertyChanged(p => p.HtmlText);
+            }
+        }
+
+        private string plainText = string.Empty;
+        public string PlainText
+        {
+            get
+            {
+                return plainText;
+            }
+            set
+            {
+                plainText = value;
+                this.RaisePropertyChanged(p => p.PlainText);
             }
         }
         #endregion

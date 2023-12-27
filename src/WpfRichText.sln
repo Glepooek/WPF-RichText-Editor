@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfRichText.Example", "WpfRichText.Ex\WpfRichText.Example.csproj", "{5922EBAC-5CC0-4079-97D7-FCEC9C01AA43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfRichText", "WpfRichText\WpfRichText.csproj", "{78147C43-DB7B-4571-BC7A-E7F0075B4B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFRichTextBox", "WPFRichTextBox\WPFRichTextBox.csproj", "{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,8 +39,23 @@ Global
 		{78147C43-DB7B-4571-BC7A-E7F0075B4B78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{78147C43-DB7B-4571-BC7A-E7F0075B4B78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{78147C43-DB7B-4571-BC7A-E7F0075B4B78}.Release|x86.ActiveCfg = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Debug|x86.Build.0 = Debug|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|x86.ActiveCfg = Release|Any CPU
+		{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97FED2AF-EEE2-46DE-A386-A8021C52DACB}
 	EndGlobalSection
 EndGlobal

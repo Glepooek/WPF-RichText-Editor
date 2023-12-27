@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfRichText.Properties {
+namespace WPFRichTextBox.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WpfRichText.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfRichText.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPFRichTextBox.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,35 +57,6 @@ namespace WpfRichText.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
-        ///&lt;html&gt;
-        ///	&lt;head&gt;
-        ///		&lt;title&gt;New Bug Template&lt;/title&gt;
-        ///	&lt;/head&gt;
-        ///	&lt;body&gt;
-        ///		&lt;h1&gt;header 1&lt;/h1&gt;
-        ///		&lt;p&gt;
-        ///			&lt;span style=&quot;color:Red; font-weight:bold;&quot;&gt;RED TEXT&lt;/span&gt;
-        ///			&lt;br /&gt;
-        ///			1. Text after break
-        ///		&lt;/p&gt;
-        ///		&lt;h2&gt;header 2&lt;/h2&gt;
-        ///		&lt;p&gt;
-        ///			&lt;span style=&quot;color:Green; font-weight:bold;&quot;&gt;GREEN TEXT&lt;/span&gt;
-        ///			&lt;br /&gt;
-        ///			&lt;a href=&quot;http://www.test.de&quot;&gt;a hyperlink&lt;/a&gt;
-        ///		&lt;/p&gt;
-        ///		&lt;div&gt;
-        ///			&lt;span style=&quot;color:Red; font-weight:bold;&quot;&gt;TEXT IN DIV&lt;/span&gt;
-        ///		&lt;/d [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string HTMLPage1 {
-            get {
-                return ResourceManager.GetString("HTMLPage1", resourceCulture);
             }
         }
     }

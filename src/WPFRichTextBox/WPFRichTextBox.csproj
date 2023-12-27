@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78147C43-DB7B-4571-BC7A-E7F0075B4B78}</ProjectGuid>
+    <ProjectGuid>{23C13251-6BD3-40D0-9ECE-DB200CDBC68A}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WpfRichText</RootNamespace>
-    <AssemblyName>WpfRichText</AssemblyName>
+    <RootNamespace>WPFRichTextBox</RootNamespace>
+    <AssemblyName>WPFRichTextBox</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Debug\WpfRichText.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\WPFRichTextBox.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <NoWarn>
     </NoWarn>
@@ -53,7 +53,6 @@
     <AssemblyOriginatorKeyFile>self.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationFramework.Classic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -68,13 +67,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.Toolkit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedProperties\RichTextboxAssistant.cs" />
+    <Compile Include="ColorConverter.cs" />
     <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Controls\RichTextEditor.xaml.cs">
@@ -114,47 +110,16 @@
     <None Include="self.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Controls\Images\charactergrowfont.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\charactershrinkfont.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\editredo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\editundo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Controls\RichTextEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Controls\Images\cut.png" />
-    <Resource Include="Controls\Images\page_copy.png" />
-    <Resource Include="Controls\Images\page_paste.png" />
-    <Resource Include="Controls\Images\text_align_center.png" />
-    <Resource Include="Controls\Images\text_align_justify.png" />
-    <Resource Include="Controls\Images\text_align_left.png" />
-    <Resource Include="Controls\Images\text_align_right.png" />
-    <Resource Include="Controls\Images\text_bold.png" />
-    <Resource Include="Controls\Images\text_indent.png" />
-    <Resource Include="Controls\Images\text_indent_remove.png" />
-    <Resource Include="Controls\Images\text_italic.png" />
-    <Resource Include="Controls\Images\text_list_bullets.png" />
-    <Resource Include="Controls\Images\text_list_numbers.png" />
-    <Resource Include="Controls\Images\text_underline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\world_link.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\tick.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Images\cross.png" />
+    <Resource Include="Controls\Images\icon_bold.png" />
+    <Resource Include="Controls\Images\icon_delline.png" />
+    <Resource Include="Controls\Images\icon_italic.png" />
+    <Resource Include="Controls\Images\icon_underline.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

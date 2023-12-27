@@ -1,0 +1,53 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:WPFRichTextBox;assembly=WPFRichTextBox"
+    x:Class="WpfRichText.Window2"
+    WindowState="Maximized"
+    Title="Window2">
+
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ToggleButton
+            Margin="2"
+            x:Name="setReadOnly"
+            HorizontalAlignment="Left"
+            Content="Set ReadOnly"
+            Checked="setReadOnly_Checked"
+            Unchecked="setReadOnly_Unchecked" />
+        <Controls:RichTextEditor
+            x:Name="sampleEditor"
+            Grid.Row="1"
+            HtmlText="{Binding HtmlText, Mode=TwoWay}"
+            PlainText="{Binding PlainText, Mode=TwoWay}"
+            IsReadOnly="False"
+            Background="#FFFFFF"
+            BorderThickness="1,0,1,1"
+            BorderBrush="#DAE1E6" />
+        <Button
+            Grid.Row="2"
+            Content="Get XAML"
+            Margin="5"
+            Height="30"
+            Command="{Binding GetXamlCommand}" />
+        <Button
+            Grid.Row="3"
+            Content="Load Html"
+            Margin="5"
+            Height="30"
+            Command="{Binding LoadHtmlCommand}" />
+        <Button
+            Grid.Row="4"
+            Content="Load Plain Text"
+            Margin="5"
+            Height="30"
+            Command="{Binding GetPlainTextCommand}" />
+    </Grid>
+</Window>
