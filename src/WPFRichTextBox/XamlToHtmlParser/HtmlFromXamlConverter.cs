@@ -10,12 +10,12 @@
 
 namespace WPFRichTextBox
 {
-	using System;
-	using System.Diagnostics;
-	using System.Globalization;
-	using System.IO;
-	using System.Text;
-	using System.Xml;
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
 
     /// <summary>
     /// HtmlToXamlConverter is a static class that takes an HTML string
@@ -53,22 +53,22 @@ namespace WPFRichTextBox
                 xamlString = "<FlowDocument>" + xamlString + "</FlowDocument>";
             }
 
-				using (XmlTextReader xamlReader = new XmlTextReader(new StringReader(xamlString)))
-				{
-					htmlStringBuilder = new StringBuilder(100);
-					using (StringWriter htmlStringWiter = new StringWriter(htmlStringBuilder, CultureInfo.InvariantCulture))
-					{
-						htmlWriter = new XmlTextWriter(htmlStringWiter);
+            using (XmlTextReader xamlReader = new XmlTextReader(new StringReader(xamlString)))
+            {
+                htmlStringBuilder = new StringBuilder(100);
+                using (StringWriter htmlStringWiter = new StringWriter(htmlStringBuilder, CultureInfo.InvariantCulture))
+                {
+                    htmlWriter = new XmlTextWriter(htmlStringWiter);
 
-						if (!WriteFlowDocument(xamlReader, htmlWriter))
-						{
-							return "";
-						}
-					}
+                    if (!WriteFlowDocument(xamlReader, htmlWriter))
+                    {
+                        return "";
+                    }
+                }
 
-					string htmlString = htmlStringBuilder.ToString();
-					return htmlString;
-				}
+                string htmlString = htmlStringBuilder.ToString();
+                return htmlString;
+            }
         }
 
         #endregion Internal Methods
@@ -168,7 +168,7 @@ namespace WPFRichTextBox
                         css = "font-style:" + xamlReader.Value.ToLower(CultureInfo.InvariantCulture) + ";";
                         break;
                     case "FontWeight":
-						css = "font-weight:" + xamlReader.Value.ToLower(CultureInfo.InvariantCulture) + ";";
+                        css = "font-weight:" + xamlReader.Value.ToLower(CultureInfo.InvariantCulture) + ";";
                         break;
                     case "FontStretch":
                         break;
@@ -179,7 +179,7 @@ namespace WPFRichTextBox
                         css = "color:" + ParseXamlColor(xamlReader.Value) + ";";
                         break;
                     case "TextDecorations":
-                        css = "text-decoration:underline;";
+                        css = xamlReader.Value.ToLower(CultureInfo.InvariantCulture).Equals("strikethrough") ? "text-decoration:line-through;" : "text-decoration:underline;";
                         break;
                     case "TextEffects":
                         break;
@@ -241,10 +241,10 @@ namespace WPFRichTextBox
                         htmlWriter.WriteAttributeString("ROWSPAN", xamlReader.Value);
                         break;
 
-					// Hyperlink Attributes
-					case "NavigateUri" :
-						htmlWriter.WriteAttributeString("HREF", xamlReader.Value);
-						break;
+                    // Hyperlink Attributes
+                    case "NavigateUri":
+                        htmlWriter.WriteAttributeString("HREF", xamlReader.Value);
+                        break;
                 }
 
                 if (css != null)
@@ -280,7 +280,7 @@ namespace WPFRichTextBox
             for (int i = 0; i < values.Length; i++)
             {
                 double value;
-				if (double.TryParse(values[i], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out value))
+                if (double.TryParse(values[i], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out value))
                 {
                     values[i] = Math.Ceiling(value).ToString(CultureInfo.InvariantCulture);
                 }
@@ -447,7 +447,7 @@ namespace WPFRichTextBox
 
                 switch (xamlReader.Name)
                 {
-                    case "Run" :
+                    case "Run":
                     case "Span":
                         htmlElementName = "SPAN";
                         break;
@@ -457,10 +457,10 @@ namespace WPFRichTextBox
                     case "Bold":
                         htmlElementName = "B";
                         break;
-                    case "Italic" :
+                    case "Italic":
                         htmlElementName = "I";
                         break;
-                    case "Paragraph" :
+                    case "Paragraph":
                         htmlElementName = "P";
                         break;
                     case "BlockUIContainer":
@@ -475,32 +475,32 @@ namespace WPFRichTextBox
                     case "TableColumn":
                         htmlElementName = "COL";
                         break;
-                    case "TableRowGroup" :
+                    case "TableRowGroup":
                         htmlElementName = "TBODY";
                         break;
-                    case "TableRow" :
+                    case "TableRow":
                         htmlElementName = "TR";
                         break;
-                    case "TableCell" :
-                        htmlElementName = "TD";						
+                    case "TableCell":
+                        htmlElementName = "TD";
                         break;
-                    case "List" :
+                    case "List":
                         string marker = xamlReader.GetAttribute("MarkerStyle");
                         if (marker == null || marker == "None" || marker == "Disc" || marker == "Circle" || marker == "Square" || marker == "Box")
-							htmlElementName = "UL";
-						else
+                            htmlElementName = "UL";
+                        else
                             htmlElementName = "OL";
                         break;
-                    case "ListItem" :
+                    case "ListItem":
                         htmlElementName = "LI";
                         break;
-					case "Hyperlink" :
-						htmlElementName = "A";
-						break;
-					case "LineBreak" :
-						htmlWriter.WriteRaw("<BR />");
-						break;
-                    default :
+                    case "Hyperlink":
+                        htmlElementName = "A";
+                        break;
+                    case "LineBreak":
+                        htmlWriter.WriteRaw("<BR />");
+                        break;
+                    default:
                         htmlElementName = null; // Ignore the element
                         break;
                 }
@@ -524,8 +524,8 @@ namespace WPFRichTextBox
         }
 
         // Reader advance helpers
-		// ----------------------
-				 
+        // ----------------------
+
         /// <summary>
         /// Reads several items from xamlReader skipping all non-significant stuff.
         /// </summary>
@@ -535,46 +535,46 @@ namespace WPFRichTextBox
         /// <returns>
         /// True if new token is available; false if end of stream reached.
         /// </returns>
-		private static bool ReadNextToken(XmlReader xamlReader)
-		{
-			while (xamlReader.Read())
-			{
-				Debug.Assert(xamlReader.ReadState == ReadState.Interactive, "Reader is expected to be in Interactive state (" + xamlReader.ReadState + ")");
-				switch (xamlReader.NodeType)
-				{
-				    case XmlNodeType.Element: 
-				    case XmlNodeType.EndElement:
-				    case XmlNodeType.None:
-				    case XmlNodeType.CDATA:
-				    case XmlNodeType.Text:
-				    case XmlNodeType.SignificantWhitespace:
-					    return true;
+        private static bool ReadNextToken(XmlReader xamlReader)
+        {
+            while (xamlReader.Read())
+            {
+                Debug.Assert(xamlReader.ReadState == ReadState.Interactive, "Reader is expected to be in Interactive state (" + xamlReader.ReadState + ")");
+                switch (xamlReader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                    case XmlNodeType.EndElement:
+                    case XmlNodeType.None:
+                    case XmlNodeType.CDATA:
+                    case XmlNodeType.Text:
+                    case XmlNodeType.SignificantWhitespace:
+                        return true;
 
-				    case XmlNodeType.Whitespace:
-					    if (xamlReader.XmlSpace == XmlSpace.Preserve)
-					    {
-						    return true;
-					    }
-					    // ignore insignificant whitespace
-					    break;
+                    case XmlNodeType.Whitespace:
+                        if (xamlReader.XmlSpace == XmlSpace.Preserve)
+                        {
+                            return true;
+                        }
+                        // ignore insignificant whitespace
+                        break;
 
-				    case XmlNodeType.EndEntity:
-				    case XmlNodeType.EntityReference:
+                    case XmlNodeType.EndEntity:
+                    case XmlNodeType.EntityReference:
                         //  Implement entity reading
-					    //xamlReader.ResolveEntity();
-					    //xamlReader.Read();
-					    //ReadChildNodes( parent, parentBaseUri, xamlReader, positionInfo);
+                        //xamlReader.ResolveEntity();
+                        //xamlReader.Read();
+                        //ReadChildNodes( parent, parentBaseUri, xamlReader, positionInfo);
                         break; // for now we ignore entities as insignificant stuff
 
                     case XmlNodeType.Comment:
                         return true;
                     case XmlNodeType.ProcessingInstruction:
-				    case XmlNodeType.DocumentType:
-				    case XmlNodeType.XmlDeclaration:
-				    default:
-					    // Ignorable stuff
-					    break;
-				}
+                    case XmlNodeType.DocumentType:
+                    case XmlNodeType.XmlDeclaration:
+                    default:
+                        // Ignorable stuff
+                        break;
+                }
             }
             return false;
         }
