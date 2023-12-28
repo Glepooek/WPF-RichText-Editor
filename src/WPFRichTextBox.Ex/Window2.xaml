@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Controls:RichTextEditor
@@ -51,5 +52,17 @@
             Margin="5"
             Height="30"
             Command="{Binding GetPlainTextCommand}" />
+        <DockPanel Grid.Row="5" Margin="5">
+            <Button
+                DockPanel.Dock="Top"
+                Content="IncreaseFontSize"
+                Height="30"
+                Click="Button_Click" />
+            <Button
+                DockPanel.Dock="Bottom"
+                Content="DecreaseFontSize"
+                Height="30"
+                Click="Button_Click_1" />
+        </DockPanel>
     </Grid>
 </Window>

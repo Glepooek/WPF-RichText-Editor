@@ -25,6 +25,16 @@ namespace WPFRichTextBox.Example
 		{
 			this.sampleEditor.IsReadOnly = false;
 		}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.sampleEditor.IncreaseFontSize(1, 24);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.sampleEditor.DecreaseFontSize(1, 14);
+        }
     }
 
     #region PageViewModel

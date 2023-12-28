@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPFRichTextBox
 {
@@ -107,29 +97,25 @@ namespace WPFRichTextBox
             TextRange selectedText = new TextRange(mainRTB.Selection.Start, mainRTB.Selection.End);
             if (selectedText != null && !selectedText.IsEmpty)
             {
-                var textDecorations = (TextDecorationCollection)selectedText.GetPropertyValue(Inline.TextDecorationsProperty);
-                var textDecoration = textDecorations.FirstOrDefault(td => td.Location == TextDecorationLocation.Strikethrough);
-                if (textDecoration != null)
+                if (selectedText.GetPropertyValue(Inline.TextDecorationsProperty) is TextDecorationCollection textDecorations)
                 {
-                    // 如果已经有了删除线，那么移除
-                    //selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
-                    textDecorations.Remove(textDecoration);
-                }
-                else
-                {
-                    // 如果没有删除线，那么添加
-                    //selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
-                    var myTextDecoration = new TextDecoration() { Location = TextDecorationLocation.Strikethrough };
-                    if (textDecorations.IsFrozen)
+                    var clone = textDecorations.Clone();
+                    var textDecoration = clone.FirstOrDefault(td => td.Location == TextDecorationLocation.Strikethrough);
+                    if (textDecoration != null)
                     {
-                        var clone = textDecorations.Clone();
-                        clone.Add(myTextDecoration);
-                        selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, clone);
+                        clone.Remove(textDecoration);
                     }
                     else
                     {
-                        textDecorations.Add(myTextDecoration);
+                        var myTextDecoration = new TextDecoration() { Location = TextDecorationLocation.Strikethrough };                      
+                        clone.Add(myTextDecoration);
                     }
+
+                    selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, clone);
+                }
+                else
+                {
+                    selectedText.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
                 }
             }
         }
@@ -146,6 +132,7 @@ namespace WPFRichTextBox
             Color color = (Color)ColorConverter.ConvertFromString(colorStr);
             var brush = new SolidColorBrush(color);
             this.mainRTB.Selection.ApplyPropertyValue(ForegroundProperty, brush);
+            this.mainRTB.Focus();
         }
 
         private void FontSizeCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,6 +159,7 @@ namespace WPFRichTextBox
             }
 
             this.mainRTB.Selection.ApplyPropertyValue(FontSizeProperty, fontSize);
+            this.mainRTB.Focus();
         }
 
         private void mainRTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -183,27 +171,41 @@ namespace WPFRichTextBox
 
         #region Methods
 
-        public void IncreaseFontSize(double fontSize)
+        /// <summary>
+        /// 增大字体
+        /// </summary>
+        /// <param name="fontSize"></param>
+        /// <param name="maxFontSize"></param>
+        public void IncreaseFontSize(double fontSize, double maxFontSize)
         {
-            EditingCommands.IncreaseFontSize.Execute(fontSize, this.mainRTB);
+            var currentFontSize = this.mainRTB.FontSize;
+            if (currentFontSize >= maxFontSize)
+            {
+                return;
+            }
+            currentFontSize += fontSize;
+            this.mainRTB.FontSize = currentFontSize;
         }
 
-        public void DecreaseFontSize(double fontSize)
+        /// <summary>
+        /// 减小字体
+        /// </summary>
+        /// <param name="fontSize"></param>
+        ///  <param name="minFontSize"></param>
+        public void DecreaseFontSize(double fontSize, double minFontSize)
         {
-            EditingCommands.DecreaseFontSize.Execute(fontSize, this.mainRTB);
+            var currentFontSize = this.mainRTB.FontSize;
+            if (minFontSize < 0 || currentFontSize <= minFontSize)
+            {
+                return;
+            }
+            currentFontSize -= fontSize;
+            this.mainRTB.FontSize = currentFontSize;
         }
 
         private string GetPlainText()
         {
-            TextRange textRange = new TextRange(
-                // TextPointer to the start of content in the RichTextBox.
-                this.mainRTB.Document.ContentStart,
-                // TextPointer to the end of content in the RichTextBox.
-                this.mainRTB.Document.ContentEnd
-            );
-
-            // The Text property on a TextRange object returns a string
-            // representing the plain text content of the TextRange.
+            TextRange textRange = new TextRange(this.mainRTB.Document.ContentStart, this.mainRTB.Document.ContentEnd);
             return textRange.Text;
         }
 
