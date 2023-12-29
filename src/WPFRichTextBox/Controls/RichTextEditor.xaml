@@ -410,8 +410,7 @@
 
         <Style x:Key="RichTextBoxStyle" TargetType="RichTextBox">
             <Setter Property="AcceptsTab" Value="True" />
-            <Setter Property="MinHeight" Value="100" />
-            <Setter Property="AcceptsTab" Value="True" />
+            <Setter Property="Padding" Value="5" />
             <Setter Property="BorderThickness" Value="1,0,1,1" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />

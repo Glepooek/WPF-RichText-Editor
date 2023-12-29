@@ -141,6 +141,7 @@ namespace WPFRichTextBox
 			}
 			return string.Empty;
         }
+
 		/// <summary>
 		/// 
 		/// </summary>

@@ -206,7 +206,7 @@ namespace WPFRichTextBox
         private string GetPlainText()
         {
             TextRange textRange = new TextRange(this.mainRTB.Document.ContentStart, this.mainRTB.Document.ContentEnd);
-            return textRange.Text;
+            return textRange.Text.Replace("\r\n", "");
         }
 
         #endregion
