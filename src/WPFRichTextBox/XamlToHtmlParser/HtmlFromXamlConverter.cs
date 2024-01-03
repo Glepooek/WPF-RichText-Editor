@@ -181,6 +181,9 @@ namespace WPFRichTextBox
                     case "TextDecorations":
                         css = xamlReader.Value.ToLower(CultureInfo.InvariantCulture).Equals("strikethrough") ? "text-decoration:line-through;" : "text-decoration:underline;";
                         break;
+                    case "Location":
+                        css = xamlReader.Value.ToLower(CultureInfo.InvariantCulture).Equals("strikethrough") ? "line-through" : "underline";
+                        break;
                     case "TextEffects":
                         break;
                     case "Emphasis":
@@ -326,7 +329,7 @@ namespace WPFRichTextBox
         /// </param>
         private static void WriteElementContent(XmlTextReader xamlReader, XmlTextWriter htmlWriter, StringBuilder inlineStyle)
         {
-            Debug.Assert(xamlReader.NodeType == XmlNodeType.Element);
+            //Debug.Assert(xamlReader.NodeType == XmlNodeType.Element);
 
             bool elementContentStarted = false;
 
@@ -349,7 +352,7 @@ namespace WPFRichTextBox
                         case XmlNodeType.Element:
                             if (xamlReader.Name.Contains("."))
                             {
-                                AddComplexProperty(xamlReader, inlineStyle);
+                                AddComplexProperty(xamlReader, htmlWriter, inlineStyle);
                             }
                             else
                             {
@@ -405,17 +408,43 @@ namespace WPFRichTextBox
         /// <param name="inlineStyle">
         /// StringBuilder containing a value for STYLE attribute.
         /// </param>
-        private static void AddComplexProperty(XmlTextReader xamlReader, StringBuilder inlineStyle)
+        private static void AddComplexProperty(XmlTextReader xamlReader, XmlTextWriter htmlWriter, StringBuilder inlineStyle)
         {
             Debug.Assert(xamlReader.NodeType == XmlNodeType.Element);
+            StringBuilder textDecorations = new StringBuilder();
 
             if (inlineStyle != null && xamlReader.Name.EndsWith(".TextDecorations", StringComparison.OrdinalIgnoreCase))
             {
-                inlineStyle.Append("text-decoration:underline;");
+                textDecorations.Append("text-decoration:");
+                while (ReadNextToken(xamlReader) && xamlReader.NodeType != XmlNodeType.EndElement)
+                {
+                    var name = xamlReader.Name;
+                    if (string.IsNullOrEmpty(name) || name.Equals("TextDecorationCollection"))
+                    {
+                        continue;
+                    }
+
+                    if (name.Equals("TextDecoration"))
+                    {
+                        WriteFormattingProperties(xamlReader, /*htmlWriter:*/htmlWriter, /*inlineStyle:*/inlineStyle);
+                        textDecorations.Append(inlineStyle.ToString());
+                        textDecorations.Append(" ");
+                    }
+                }
+                textDecorations.Append(";");
             }
 
             // Skip the element representing the complex property
-            WriteElementContent(xamlReader, /*htmlWriter:*/null, /*inlineStyle:*/null);
+            //WriteElementContent(xamlReader, /*htmlWriter:*/null, /*inlineStyle:*/null);
+
+            if (htmlWriter != null && inlineStyle.Length > 0)
+            {
+                // Output STYLE attribute and clear inlineStyle buffer.
+                htmlWriter.WriteAttributeString("STYLE", textDecorations.ToString());
+                inlineStyle.Remove(0, inlineStyle.Length);
+            }
+
+            WriteElementContent(xamlReader, htmlWriter, inlineStyle);
         }
 
         /// <summary>

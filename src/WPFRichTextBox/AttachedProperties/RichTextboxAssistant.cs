@@ -19,8 +19,7 @@ namespace WPFRichTextBox
            DependencyProperty.RegisterAttached("BoundDocument", typeof(string), typeof(RichTextBoxAssistant),
            new FrameworkPropertyMetadata(null,
                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-               OnBoundDocumentChanged)
-               );
+               OnBoundDocumentChanged));
 
         private static void OnBoundDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

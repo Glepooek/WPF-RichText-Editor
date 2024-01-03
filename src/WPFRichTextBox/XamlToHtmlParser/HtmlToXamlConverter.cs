@@ -2054,13 +2054,41 @@ namespace WPFRichTextBox
                         {
                             if ((string)propertyEnumerator.Value == "true")
                             {
-                                xamlElement.SetAttribute(Xaml_TextDecorations, Xaml_TextDecorations_Underline);
+                                string finalValue = string.Empty;
+                                var attribute = xamlElement.GetAttributeNode(Xaml_TextDecorations);
+                                if (attribute == null || string.IsNullOrEmpty(attribute.Value))
+                                {
+                                    finalValue = Xaml_TextDecorations_Underline;
+                                }
+                                else
+                                {
+                                    finalValue = $"{attribute.Value},{Xaml_TextDecorations_Underline}";
+                                }
+                                xamlElement.SetAttribute(Xaml_TextDecorations, finalValue);
+                            }
+                        }
+                        break;
+                    case "text-decoration-line-through":
+                        if (!isBlock)
+                        {
+                            if ((string)propertyEnumerator.Value == "true")
+                            {
+                                string finalValue = string.Empty;
+                                var attribute = xamlElement.GetAttributeNode(Xaml_TextDecorations);
+                                if (attribute == null || string.IsNullOrEmpty(attribute.Value))
+                                {
+                                    finalValue = Xaml_TextDecorations_Strikethrough;
+                                }
+                                else
+                                {
+                                    finalValue = $"{attribute.Value},{Xaml_TextDecorations_Strikethrough}";
+                                }
+                                xamlElement.SetAttribute(Xaml_TextDecorations, finalValue);
                             }
                         }
                         break;
                     case "text-decoration-none":
                     case "text-decoration-overline":
-                    case "text-decoration-line-through":
                     case "text-decoration-blink":
                         //  Convert from all other text-decorations values
                         if (!isBlock)
@@ -2703,8 +2731,10 @@ namespace WPFRichTextBox
 		public const string Xaml_TextDecorations = "TextDecorations";
 		/// <summary></summary>
 		public const string Xaml_TextDecorations_Underline = "Underline";
-		/// <summary></summary>
-		public const string Xaml_TextIndent = "TextIndent";
+        /// <summary></summary>
+		public const string Xaml_TextDecorations_Strikethrough = "Strikethrough";
+        /// <summary></summary>
+        public const string Xaml_TextIndent = "TextIndent";
 		/// <summary></summary>
 		public const string Xaml_TextAlignment = "TextAlignment";
 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace WPFRichTextBox.Example
 {
@@ -54,8 +55,8 @@ namespace WPFRichTextBox.Example
 
             LoadHtmlCommand = new DelegateCommand(() =>
             {
-                //this.HtmlText = Properties.Resources.HTMLPage1;
-                this.HtmlText = Properties.Resources.HTMLPage2;
+                this.HtmlText = Properties.Resources.HTMLPage1;
+                //this.HtmlText = Properties.Resources.HTMLPage2;
             });
 
             GetPlainTextCommand = new DelegateCommand(() =>
