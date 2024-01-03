@@ -55,8 +55,9 @@ namespace WPFRichTextBox.Example
 
             LoadHtmlCommand = new DelegateCommand(() =>
             {
-                this.HtmlText = Properties.Resources.HTMLPage1;
+                //this.HtmlText = Properties.Resources.HTMLPage1;
                 //this.HtmlText = Properties.Resources.HTMLPage2;
+                this.HtmlText = Properties.Resources.HTMLPage3;
             });
 
             GetPlainTextCommand = new DelegateCommand(() =>

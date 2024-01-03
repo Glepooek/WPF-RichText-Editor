@@ -121,6 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTMLPage3.html" />
     <Content Include="HTMLPage2.html" />
     <Content Include="HTMLPage1.html" />
   </ItemGroup>

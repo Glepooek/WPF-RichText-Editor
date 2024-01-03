@@ -2050,7 +2050,7 @@ namespace WPFRichTextBox
                         SetPropertyValue(xamlElement, TextElement.BackgroundProperty, (string)propertyEnumerator.Value);
                         break;
                     case "text-decoration-underline":
-                        if (!isBlock)
+                        //if (!isBlock)
                         {
                             if ((string)propertyEnumerator.Value == "true")
                             {
@@ -2069,7 +2069,7 @@ namespace WPFRichTextBox
                         }
                         break;
                     case "text-decoration-line-through":
-                        if (!isBlock)
+                        //if (!isBlock)
                         {
                             if ((string)propertyEnumerator.Value == "true")
                             {

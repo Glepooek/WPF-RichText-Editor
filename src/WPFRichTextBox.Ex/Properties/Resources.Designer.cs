@@ -90,11 +90,48 @@ namespace WPFRichTextBox.Example.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;span style=&quot;font-family:BlinkMacSystemFont, &amp;quot;background-color:#FFFFFF;&quot;&gt;本系列视频课程为适配课后服务双重场景的“悦”读类课后服务，适合小学学段。&lt;/span&gt;&lt;br /&gt;&lt;span style=&quot;font-family:BlinkMacSystemFont, &amp;quot;background-color:#FFFFFF;&quot;&gt;课程包含大猫英语分级阅读预备级至八级、共144本读物的阅读精讲视频课，总时长近144学时（按照40分钟/学时）。视频课程采用教师讲授、师生互动的形式，通过趣味热身导入，资深名师全方位解读绘本，课堂贯穿多种阅读策略，全面提升学生的阅读能力，并注重学以致用，情感升华，培养跨文化意识，树立正向价值观。&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span style=&quot;font-family:BlinkMacSystemFont, &amp;quot;background-color:#FFFFFF;&quot;&gt;课程可配合“大猫英语分级阅读”读物使用。“大猫英语分级阅读”旨在为4-18岁中国少年儿童英语阅读提供全面解决方案，图书为教育 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///   查找类似 &lt;HTML&gt;
+        ///&lt;BODY&gt;
+        ///    &lt;DIV STYLE=&quot;text-align:Left;font-family:Microsoft YaHei UI;font-style:normal;font-weight:normal;font-size:20;color:#000000;&quot;&gt;
+        ///        &lt;DIV&gt;
+        ///            &lt;DIV&gt;
+        ///                &lt;P&gt;
+        ///                    &lt;SPAN STYLE=&quot;text-decoration:underline;&quot;&gt;我的&lt;/SPAN&gt;
+        ///                &lt;/P&gt;
+        ///                &lt;P&gt;
+        ///                    &lt;SPAN STYLE=&quot;text-decoration:underline line-through ;&quot;&gt;我的&lt;/SPAN&gt;
+        ///                &lt;/P&gt;
+        ///                &lt;P&gt;
+        ///                    &lt;SPAN STYLE=&quot;text-decoration:line-through;&quot;&gt;我的 [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string HTMLPage2 {
             get {
                 return ResourceManager.GetString("HTMLPage2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;style&gt;
+        ///        .my * {
+        ///            color: white !important;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div class=&quot;my&quot;&gt;
+        ///        &lt;p style=&quot;color:red;text-decoration:underline;&quot;&gt;
+        ///            我的第一个段落。
+        ///        &lt;/p&gt;
+        ///    &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt; 的本地化字符串。
+        /// </summary>
+        internal static string HTMLPage3 {
+            get {
+                return ResourceManager.GetString("HTMLPage3", resourceCulture);
             }
         }
     }
