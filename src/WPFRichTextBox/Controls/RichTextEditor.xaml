@@ -577,6 +577,7 @@
         <RichTextBox
             x:Name="mainRTB"
             Grid.Row="2"
+            xml:lang="zh-CN"
             asis:RichTextBoxAssistant.BoundDocument="{Binding HtmlText, ElementName=uxRichTextEditor}"
             IsReadOnly="{Binding IsReadOnly, ElementName=uxRichTextEditor}"
             Background="{Binding Background, ElementName=uxRichTextEditor}"

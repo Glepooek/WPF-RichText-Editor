@@ -807,6 +807,7 @@
         <ScrollViewer Grid.Row="1" Margin="0,1,0,0">
             <RichTextBox
                 x:Name="mainRTB"
+                xml:lang="zh-CN"
                 AcceptsTab="True"
                 asis:RichTextBoxAssistant.BoundDocument="{Binding HtmlText, ElementName=uxRichTextEditor}"
                 MinHeight="100"
